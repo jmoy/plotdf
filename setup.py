@@ -4,7 +4,7 @@ setup(
   name = "plotdf",
   version = "0.1",
   description = "Plot phase portraits of 2D differential equations",
-  url = "",
+  url = "https://github.com/jmoy/plotdf",
   
   author = "Jyotirmoy Bhattacharya",
   author_email = "jyotirmoy@jyotirmoy.net",
