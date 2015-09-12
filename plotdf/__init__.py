@@ -32,7 +32,8 @@ import matplotlib.pyplot as plt
 
 def plotdf(f,
            xbound,ybound,
-           inits=None,tbounds=[0,10],tsteps=100,
+           inits=None,
+           tmax=10,nsteps=100,tdir="both",
            gridsteps=10,
            parameters = dict(),
            axes = None):
@@ -55,7 +56,10 @@ def plotdf(f,
 
   inits: if not None, gives the set of initial values to plot trajectories from.
   
-  tbounds: the starting and ending time for trajectories
+  tmax: the maximum value of 't' for which to calculate trajectories
+
+  tdir = "forward", "backward" or "both", time direction in which to 
+         plot trajectories
 
   nsteps: number of steps in trajectories
 
@@ -72,6 +76,10 @@ def plotdf(f,
   representing the arrows of the direction field and the rest are the 
   Lines2D objects representing the trajectories.
   """
+
+  if tdir not in ["forward","backward","both"]:
+    raise ValueError("'tdir' must be 'forward', 'backward' or 'both'")
+  
   if axes is None:
     axes = plt.gca()
 
@@ -92,9 +100,17 @@ def plotdf(f,
   if inits is not None:
     def g(x,t):
       return f(x,**parameters)
-    t = np.linspace(tbounds[0],tbounds[1],tsteps)
+    def bg(x,t):
+      return -f(x,**parameters)
+    t = np.linspace(0,tmax,nsteps)
     for y0 in inits:
-      traj = scint.odeint(g,y0,t)
+      traj_f = np.empty((0,2))
+      traj_b = np.empty((0,2))
+      if tdir in ["forward","both"]:
+        traj_f = scint.odeint(g,y0,t)
+      if tdir in ["backward","both"]:
+        traj_b = scint.odeint(bg,y0,t)
+      traj = np.vstack((np.flipud(traj_b),traj_f))
       artists.extend(axes.plot(traj[:,0],traj[:,1],linewidth=1.2))
   plt.xlim(xbound)
   plt.ylim(ybound)

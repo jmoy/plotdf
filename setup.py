@@ -2,7 +2,7 @@ from setuptools import setup,find_packages
 
 setup(
   name = "plotdf",
-  version = "0.1",
+  version = "0.2",
   description = "Plot phase portraits of 2D differential equations",
   url = "https://github.com/jmoy/plotdf",
   
