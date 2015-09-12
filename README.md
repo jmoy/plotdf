@@ -5,7 +5,7 @@ Inspired by Maxima's `plotdf` function.
 
 ## Usage
 
-To plot $dx/dt = y$, $dy/dt = -g \sin(x) / l - by/(ml)$:
+To plot `dx/dt = y`, `dy/dt = -g sin(x) / l - b y/ (m l)`:
 
 ````
   from math import sin
