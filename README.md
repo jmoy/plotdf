@@ -23,3 +23,14 @@ To plot `dx/dt = y`, `dy/dt = -g sin(x) / l - b y/ (m l)`:
 ````
 
 For the full list of parameters to `plotdf`, see `help(plotdf.plotdf)`.
+
+## Dependencies
+
+Both Python 2 and 3 are supported. You need `matplotlib`,
+`numpy` and `scipy` installed.
+
+## Installation
+
+The package is on PyPI so you can install it with
+
+    $ pip install plotdf
